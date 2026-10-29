@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Search popular movies, save your favorites, and discover your next watch.">
+    <title>Movies Directory</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="skip-link" href="#main-content">Skip to main content</a>
+      <div class="header-inner">
+        <a class="brand" href="#home">
+          <span class="brand-mark" aria-hidden="true">M</span>
+          <span>Movies Directory</span>
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="#movies">Search &amp; results</a>
+          <a href="#watchlist">Watchlist <span class="nav-count" id="nav-count">0</span></a>
+          <a href="#signup">Newsletter</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="intro" id="home" aria-labelledby="page-title">
+        <p class="eyebrow">A COLLECTION OF STORIES</p>
+        <h1 id="page-title">Movies Directory</h1>
+        <p class="intro-copy">Find a film for the feeling you’re in. Explore the collection, save something for later, and discover a story worth sharing.</p>
+      </section>
+
+      <section class="content-section" id="movies" aria-labelledby="movies-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">EXPLORE THE COLLECTION</p>
+            <h2 id="movies-heading">Search &amp; results</h2>
+          </div>
+          <p class="section-note">A few great stories to get you started.</p>
+        </div>
+
+        <div class="search-field">
+          <label for="movie-search">Search</label>
+          <input id="movie-search" name="search" type="search" placeholder="Search by title, genre, year, or director" autocomplete="off">
+        </div>
+        <p id="results-count" class="results-count" role="status" aria-live="polite" aria-atomic="true"></p>
+        <p id="load-error" class="load-error" role="alert" hidden></p>
+        <div id="movie-results" class="movie-grid" aria-label="Movie search results"></div>
+        <p id="empty-results" class="empty-state" hidden>No movies match your search. Try another title, genre, year, or director.</p>
+      </section>
+
+      <section class="content-section watchlist-section" id="watchlist" aria-labelledby="watchlist-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">SAVE FOR LATER</p>
+            <h2 id="watchlist-heading">Your watchlist <span id="watchlist-count">(0)</span></h2>
+          </div>
+          <p class="section-note">Your saved films, all in one place.</p>
+        </div>
+        <p id="watchlist-status" class="visually-hidden" role="status" aria-live="polite"></p>
+        <div id="watchlist-results" class="watchlist-grid"></div>
+        <p id="watchlist-empty" class="empty-state">Your watchlist is empty. Save a movie and it will appear here.</p>
+      </section>
+
+      <section class="signup-section" id="signup" aria-labelledby="signup-heading">
+        <div class="signup-intro">
+          <p class="eyebrow">MOVIE NIGHT, SORTED</p>
+          <h2 id="signup-heading">Get thoughtful picks in your inbox.</h2>
+          <p>Sign up for occasional recommendations chosen around the kinds of films you love.</p>
+        </div>
+        <form id="signup-form" class="signup-form" novalidate>
+          <div class="form-field">
+            <label for="signup-name">Name</label>
+            <input id="signup-name" name="name" type="text" autocomplete="name" aria-describedby="name-error">
+            <span class="field-error" id="name-error"></span>
+          </div>
+          <div class="form-field">
+            <label for="signup-email">Email</label>
+            <input id="signup-email" name="email" type="email" autocomplete="email" aria-describedby="email-error">
+            <span class="field-error" id="email-error"></span>
+          </div>
+          <div class="form-field">
+            <label for="signup-genre">Preferred movie genre</label>
+            <select id="signup-genre" name="genre" aria-describedby="genre-error">
+              <option value="">Choose a genre</option>
+              <option value="Action">Action</option>
+              <option value="Animation">Animation</option>
+              <option value="Drama">Drama</option>
+              <option value="Sci-Fi">Sci-Fi</option>
+              <option value="Surprise me">Surprise me</option>
+            </select>
+            <span class="field-error" id="genre-error"></span>
+          </div>
+          <div class="consent-row">
+            <input id="signup-consent" name="consent" type="checkbox" aria-describedby="consent-error">
+            <label for="signup-consent">I agree to receive the occasional movie newsletter.</label>
+          </div>
+          <span class="field-error consent-error" id="consent-error"></span>
+          <button class="submit-button" type="submit">Sign me up <span aria-hidden="true">→</span></button>
+          <p id="form-message" class="form-message" role="status" aria-live="polite" aria-atomic="true"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="#home"><span class="brand-mark" aria-hidden="true">M</span><span>Movies Directory</span></a>
+      <p>For the love of a good story.</p>
+      <a class="back-to-top" href="#main-content">Back to top ↑</a>
+    </footer>
+
+    <dialog id="movie-dialog" class="movie-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+      <div class="dialog-inner">
+        <button id="dialog-close" class="dialog-close" type="button" aria-label="Close movie details">Close <span aria-hidden="true">×</span></button>
+        <div id="dialog-poster" class="dialog-poster"></div>
+        <div class="dialog-copy">
+          <p id="dialog-meta" class="eyebrow"></p>
+          <h2 id="dialog-title" tabindex="-1"></h2>
+          <p id="dialog-director" class="dialog-director"></p>
+          <p id="dialog-description" class="dialog-description"></p>
+          <button id="dialog-save" class="save-button dialog-save" type="button" aria-label="Save selected movie" aria-pressed="false"></button>
+        </div>
+      </div>
+    </dialog>
+  </body>
+</html>
