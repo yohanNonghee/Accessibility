@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Project Report</title>
+    <style>
+        body { font-family: sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #2d3748; }
+        h1, h2 { color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #cbd5e0; padding: 12px; text-align: left; }
+        th { background: #edf2f7; }
+        .highlight { background: #fffaf0; border-left: 4px solid #dd6b20; padding: 15px; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <h1>Accessibility Evaluation Report</h1>
+    
+    <h2>1. A/B Test Failures Comparison</h2>
+    <p>Results of running Playwright Tests comparing Project A and Project B</p>
+    <table>
+        <tr>
+            <th>Test suite (Test Cases)</th>
+            <th>Project A (No Skill)</th>
+            <th>Project B (With Skill)</th>
+        </tr>
+        <tr>
+            <td>Keyboard Navigation & Main Task</td>
+            <td>❌ Failed (Focus lost / Tab doesn't reach some buttons)</td>
+            <td>✅ Passed (Completed tasks with keyboard 100%)</td>
+        </tr>
+        <tr>
+            <td>Dialog Focus Management</td>
+            <td>❌ Failed (Opened Dialog but focus not moved in / Closed but didn't bounce back)</td>
+            <td>✅ Passed (Focus trap and Focus return work correctly)</td>
+        </tr>
+        <tr>
+            <td>Accessible Names (ARIA & Labels)</td>
+            <td>❌ Failed (Save button lacks a clear aria-label)</td>
+            <td>✅ Passed (All buttons have clear accessible names)</td>
+        </tr>
+        <tr>
+            <td>Axe-core Serious/Critical Violations</td>
+            <td>❌ Found 4 violations</td>
+            <td>✅ No Serious or Critical violations found</td>
+        </tr>
+    </table>
+
+    <h2>2. Agent Div Experiment (AI Agent Behavior)</h2>
+    <div class="highlight">
+        <p><strong>Before changing to div:</strong> The AI Agent could find and click the save button correctly because it used the <code>&lt;button&gt;</code> tag with a clear accessible name.</p>
+        <p><strong>After changing the button to div:</strong> When the save button was changed to a plain <code>&lt;div&gt;</code> tag without <code>role="button"</code> or <code>tabindex</code>, it caused the AI Agent to fail in recognizing or interacting with the button, and the screen reader skipped reading it entirely, leading to failure in completing the main task.</p>
+    </div>
+
+    <h2>3. Manual Testing Findings (Findings from Manual Testing)</h2>
+    <ul>
+        <li><strong>200% Zoom:</strong> It was found that in Project A, some parts of the form overlap when the page is zoomed in, but in Project B, the responsive layout passes the Reflow criterion.</li>
+        <li><strong>Screen Reader:</strong> The announcement of result counts through <code>aria-live="polite"</code> helps visually impaired users know about changes immediately after typing a search query, which some automated tools do not cover as comprehensively as real-time audio feedback.</li>
+    </ul>
+
+    <h2>4. Key Skill Rules That Make a Difference</h2>
+    <p>The most impactful rules are <strong>Focus Management & Keyboard Navigation</strong> and the requirement to use Native HTML Elements (do not use div for buttons) which ensures AI generates correct code from the start, preventing errors in focus control within Dialogs.</p>
+
+    <h2>5. Things AI Got Wrong in the Early Stages</h2>
+    <p>In the early stages, AI often preferred to use generic tags like <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code> with click events instead of using the actual <code>&lt;button&gt;</code> tag, and would often forget to set up scripts to return focus to the original button after closing a Dialog if no custom skills were in place.</p>
+</body>
+</html>
