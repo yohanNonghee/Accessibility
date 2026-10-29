@@ -49,7 +49,7 @@ The suite covers the keyboard-only search/dialog/watchlist/sign-up flow, require
 
 ## GitHub Pages deployment
 
-The `.github/workflows/pages.yml` workflow publishes the contents of `b/` as the website root after a push to `main` or `master`. In the repository's **Settings → Pages**, choose **GitHub Actions** as the build and deployment source. The workflow also supports manual runs.
+The `.github/workflows/pages.yml` workflow publishes the contents of `b/` as the website root after a push to `main` or `master`, and also supports manual runs. Before its first run, open the repository's **Settings → Pages** and select **GitHub Actions** as the build and deployment source. `actions/configure-pages` needs the Pages site to exist. Its optional automatic-enablement mode requires a separate token with repository administration/Pages permissions; the default `GITHUB_TOKEN` is not sufficient.
 
 ## Project files
 

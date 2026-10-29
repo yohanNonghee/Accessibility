@@ -20,4 +20,4 @@ npx playwright install chromium
 npm test
 ```
 
-See [reademe.md](./reademe.md) for feature details, form behavior, and deployment notes. Enable GitHub Pages with **GitHub Actions** as the source in repository settings.
+See [reademe.md](./reademe.md) for feature details, form behavior, and deployment notes. Before the first deployment, enable GitHub Pages with **GitHub Actions** as the source in **Settings → Pages**.
