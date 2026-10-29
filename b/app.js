@@ -39,8 +39,9 @@ function loadSavedMovieIds() {
 function persistSavedMovieIds() {
   try {
     localStorage.setItem("movies-directory-watchlist", JSON.stringify(savedMovieIds));
+    return true;
   } catch (error) {
-    watchlistStatus.textContent = "Your browser could not store the watchlist. Saved movies will remain until you leave this page.";
+    return false;
   }
 }
 
@@ -194,11 +195,14 @@ function toggleSaved(movieId) {
   savedMovieIds = wasSaved
     ? savedMovieIds.filter((id) => id !== movieId)
     : [...savedMovieIds, movieId];
-  persistSavedMovieIds();
+  const persisted = persistSavedMovieIds();
   renderWatchlist();
   refreshSaveButtons();
   updateDialogSave();
-  watchlistStatus.textContent = `${movie.title} ${wasSaved ? "removed from" : "added to"} your watchlist.`;
+  const action = wasSaved ? "removed from" : "added to";
+  watchlistStatus.textContent = persisted
+    ? `${movie.title} ${action} your watchlist.`
+    : `${movie.title} ${action} your watchlist for this visit. Your browser could not save the change.`;
 }
 
 function closeDialog() {
@@ -211,10 +215,17 @@ async function loadMovies() {
     if (!response.ok) throw new Error(`Movie data request returned ${response.status}.`);
     const data = await response.json();
     const validData = Array.isArray(data) && data.length >= 8 && data.every((movie) =>
-      Number.isInteger(movie.id) && movie.title && movie.genre && movie.year && movie.director && movie.description
-    );
+      Number.isInteger(movie.id) && movie.id > 0 &&
+      typeof movie.title === "string" && movie.title.trim() &&
+      typeof movie.genre === "string" && movie.genre.trim() &&
+      Number.isInteger(movie.year) &&
+      typeof movie.director === "string" && movie.director.trim() &&
+      typeof movie.description === "string" && movie.description.trim()
+    ) && new Set(data.map((movie) => movie.id)).size === data.length;
     if (!validData) throw new Error("Movie data must contain at least eight complete records.");
     movies = data;
+    const validIds = new Set(movies.map((movie) => movie.id));
+    savedMovieIds = savedMovieIds.filter((id) => validIds.has(id));
     renderMovies();
     renderWatchlist();
   } catch (error) {

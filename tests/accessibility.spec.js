@@ -1,10 +1,19 @@
 const { test, expect } = require('@playwright/test');
 const AxeBuilder = require('@axe-core/playwright').default;
+const movieSiteUrl = process.env.MOVIE_SITE_URL || '/b/';
+
+async function tabUntilFocused(page, locator, maxTabs = 20) {
+  for (let i = 0; i < maxTabs; i += 1) {
+    if (await locator.evaluate((element) => element === document.activeElement)) return;
+    await page.keyboard.press('Tab');
+  }
+  await expect(locator).toBeFocused();
+}
 
 test.describe('Movie Directory Accessibility Tests', () => {
   
   test.beforeEach(async ({ page }) => {
-   await page.goto('http://127.0.0.1:8767/b/');
+   await page.goto(movieSiteUrl);
   });
 
   // 1. Test keyboard and main tasks (Tab, Shift+Tab, Enter, Space, Escape)
@@ -16,10 +25,7 @@ test.describe('Movie Directory Accessibility Tests', () => {
 
     // Navigate through the header controls to the search field.
     const searchInput = page.getByRole('searchbox', { name: 'Search' });
-    for (let i = 0; i < 10; i += 1) {
-      if (await searchInput.evaluate((element) => element === document.activeElement)) break;
-      await page.keyboard.press('Tab');
-    }
+    await tabUntilFocused(page, searchInput);
     await expect(searchInput).toBeFocused();
 
     // Type in a search for a movie (e.g. "Inception").
@@ -55,18 +61,40 @@ test.describe('Movie Directory Accessibility Tests', () => {
 
     // Continue with the sign-up fields using the keyboard.
     const nameInput = page.getByRole('textbox', { name: 'Name' });
-    await nameInput.focus();
+    await tabUntilFocused(page, nameInput);
+    await expect(nameInput).toBeFocused();
     await page.keyboard.type('Alex');
     await page.keyboard.press('Tab');
     await page.keyboard.type('alex@example.com');
     await page.keyboard.press('Tab');
-    await page.keyboard.type('Sci-Fi');
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Space');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Enter');
     await expect(page.locator('#form-message')).toContainText('Thanks, Alex');
+  });
+
+  test('Sign-up button validates required fields and submits valid details', async ({ page }) => {
+    await page.getByRole('button', { name: 'Sign me up' }).click();
+    await expect(page.locator('#name-error')).toHaveText('Please enter your name.');
+    await expect(page.locator('#email-error')).toHaveText('Please enter your email address.');
+    await expect(page.locator('#genre-error')).toHaveText('Please choose a movie genre.');
+    await expect(page.locator('#consent-error')).toHaveText('Please agree to receive the newsletter.');
+
+    await page.locator('#signup-name').fill('Casey');
+    await page.locator('#signup-email').fill('casey@example.com');
+    await page.locator('#signup-genre').selectOption('Drama');
+    await page.locator('#signup-consent').check();
+    await page.getByRole('button', { name: 'Sign me up' }).click();
+
+    await expect(page.locator('#form-message')).toHaveText(
+      'Thanks, Casey. You are signed up for Drama movie recommendations.'
+    );
   });
 
   // 2. Verify that the focus indicator (focus visible) is clearly visible.

@@ -1,0 +1,14 @@
+{
+  "name": "movies-directory",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Accessible static movie directory with Playwright checks.",
+  "scripts": {
+    "start": "node tests/static-server.js",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.64.1"
+  }
+}
