@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f3ed">
+    <meta name="description" content="Explore memorable movies, save the ones you love, and find your next watch.">
+    <title>Reel Good — Movies Directory</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="skip-link" href="#main-content">Skip to main content</a>
+      <div class="header-inner">
+        <a class="wordmark" href="#home" aria-label="Reel Good home">
+          <span class="wordmark-icon" aria-hidden="true">R</span>
+          <span>reel good<span class="wordmark-period">.</span></span>
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="#movies">Discover</a>
+          <a href="#saved">My watchlist <span class="nav-count" id="saved-count">0</span></a>
+          <a href="#signup">Newsletter</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" id="home" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span aria-hidden="true">✳</span> YOUR NEXT FAVORITE FILM</p>
+          <h1 id="page-title">A good movie<br>is always <em>worth finding.</em></h1>
+          <p class="hero-description">Browse the stories that stay with you. Find a classic, save it for later, and make tonight a movie night.</p>
+          <a class="hero-link" href="#movies">Find your next film <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <span class="hero-orbit orbit-one"></span>
+          <span class="hero-orbit orbit-two"></span>
+          <span class="hero-spark spark-one">✳</span>
+          <span class="hero-spark spark-two">✦</span>
+          <span class="hero-ticket"><span>TONIGHT'S<br>FEATURE</span><strong>YOUR<br>CHOICE</strong><small>ADMIT ONE</small></span>
+          <span class="hero-caption">Stories worth staying up for.</span>
+        </div>
+      </section>
+
+      <section class="catalog section-shell" id="movies" aria-labelledby="movies-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">THE GOOD STUFF</p>
+            <h2 id="movies-heading">Find a film</h2>
+          </div>
+          <p class="section-note">Eight picks. Countless ways to spend an evening.</p>
+        </div>
+
+        <div class="search-wrap">
+          <label for="movie-search">Search</label>
+          <div class="search-control">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="movie-search" name="search" type="search" placeholder="Try a title, director, or genre…" autocomplete="off">
+            <kbd aria-hidden="true">⌘ K</kbd>
+          </div>
+        </div>
+        <p class="results-count" id="results-count" role="status" aria-live="polite" aria-atomic="true"></p>
+        <p class="visually-hidden" id="watchlist-status" role="status" aria-live="polite"></p>
+        <p class="storage-notice" id="storage-notice" role="status" hidden></p>
+        <div class="movie-grid" id="movie-results" aria-label="Search results"></div>
+        <p class="empty-state" id="empty-results" hidden>No films match that search. Try another title, genre, or director.</p>
+
+        <section class="saved-section" id="saved" aria-labelledby="saved-heading">
+          <div class="saved-heading">
+            <div>
+              <p class="eyebrow">KEEP IT CLOSE</p>
+              <h3 id="saved-heading">Your watchlist <span id="saved-heading-count">(0)</span></h3>
+            </div>
+            <p class="saved-hint">Keep the good ones for later.</p>
+          </div>
+          <div class="saved-list" id="saved-results"></div>
+          <p class="saved-empty" id="saved-empty">Nothing saved just yet. Tap the bookmark on any film to add it here.</p>
+        </section>
+      </section>
+
+      <section class="signup-section" id="signup" aria-labelledby="signup-heading">
+        <div class="signup-intro">
+          <p class="eyebrow">A LITTLE CINEMA IN YOUR INBOX</p>
+          <h2 id="signup-heading">Good things<br>are <em>coming soon.</em></h2>
+          <p>Get thoughtful movie picks and fresh finds, sent occasionally. No spoilers, no noise.</p>
+          <span class="signup-decoration" aria-hidden="true">✳</span>
+        </div>
+        <form class="signup-form" id="signup-form" novalidate>
+          <div class="field">
+            <label for="signup-name">Your name</label>
+            <input id="signup-name" name="name" type="text" autocomplete="name" aria-describedby="name-error">
+            <span class="field-error" id="name-error"></span>
+          </div>
+          <div class="field">
+            <label for="signup-email">Email address</label>
+            <input id="signup-email" name="email" type="email" autocomplete="email" aria-describedby="email-error">
+            <span class="field-error" id="email-error"></span>
+          </div>
+          <div class="field">
+            <label for="signup-genre">Favorite kind of movie</label>
+            <select id="signup-genre" name="genre" aria-describedby="genre-error">
+              <option value="">Choose a genre</option>
+              <option value="Action">Action</option>
+              <option value="Animation">Animation</option>
+              <option value="Drama">Drama</option>
+              <option value="Sci-Fi">Sci-Fi</option>
+              <option value="Surprise me">Surprise me</option>
+            </select>
+            <span class="field-error" id="genre-error"></span>
+          </div>
+          <div class="consent-field">
+            <input id="signup-consent" name="consent" type="checkbox" aria-describedby="consent-error">
+            <label for="signup-consent">I agree to receive the occasional movie newsletter.</label>
+          </div>
+          <span class="field-error consent-error" id="consent-error"></span>
+          <button class="submit-button" type="submit">Count me in <span aria-hidden="true">↗</span></button>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+          <p class="privacy-note">Just good movies. Unsubscribe whenever.</p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="wordmark footer-wordmark" href="#home"><span class="wordmark-icon" aria-hidden="true">R</span><span>reel good<span class="wordmark-period">.</span></span></a>
+      <p>Made for people who love a good story.</p>
+      <a href="#main-content" class="back-to-top">Back to top ↑</a>
+    </footer>
+
+    <dialog class="movie-dialog" id="movie-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+      <div class="dialog-inner">
+        <button class="dialog-close" id="dialog-close" type="button" aria-label="Close movie details">Close <span aria-hidden="true">×</span></button>
+        <div class="dialog-poster" id="dialog-poster"></div>
+        <div class="dialog-copy">
+          <p class="eyebrow" id="dialog-meta"></p>
+          <h2 id="dialog-title" tabindex="-1"></h2>
+          <p class="dialog-director" id="dialog-director"></p>
+          <p class="dialog-description" id="dialog-description"></p>
+          <button class="save-button dialog-save" id="dialog-save" type="button"></button>
+        </div>
+      </div>
+    </dialog>
+  </body>
+</html>

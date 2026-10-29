@@ -1,0 +1,75 @@
+
+[
+  {
+    "id": 1,
+    "title": "Inception",
+    "genre": "Sci-Fi",
+    "year": 2010,
+    "director": "Christopher Nolan",
+    "description": "A skilled thief enters layered dreams to steal secrets and plant an idea that could change everything.",
+    "poster": "inception.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Interstellar",
+    "genre": "Sci-Fi",
+    "year": 2014,
+    "director": "Christopher Nolan",
+    "description": "A team travels beyond the stars in search of a new home as humanity faces an uncertain future.",
+    "poster": "interstellar.jpg"
+  },
+  {
+    "id": 3,
+    "title": "The Dark Knight",
+    "genre": "Action",
+    "year": 2008,
+    "director": "Christopher Nolan",
+    "description": "Batman faces the Joker, a chaotic criminal whose schemes push Gotham and its heroes to their limits.",
+    "poster": "dark-knight.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Parasite",
+    "genre": "Drama",
+    "year": 2019,
+    "director": "Bong Joon-ho",
+    "description": "A struggling family finds its way into a wealthy household, setting off a sharp and unexpected collision of worlds.",
+    "poster": "parasite.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Spirited Away",
+    "genre": "Animation",
+    "year": 2001,
+    "director": "Hayao Miyazaki",
+    "description": "A young girl enters a mysterious spirit world and must find her courage to rescue her parents.",
+    "poster": "spirited-away.jpg"
+  },
+  {
+    "id": 6,
+    "title": "The Matrix",
+    "genre": "Sci-Fi",
+    "year": 1999,
+    "director": "Lana Wachowski, Lilly Wachowski",
+    "description": "A computer hacker discovers that the world he knows is a simulation and joins a fight for freedom.",
+    "poster": "matrix.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Gladiator",
+    "genre": "Action",
+    "year": 2000,
+    "director": "Ridley Scott",
+    "description": "Betrayed and forced into the arena, a Roman general fights his way back toward justice and honor.",
+    "poster": "gladiator.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Coco",
+    "genre": "Animation",
+    "year": 2017,
+    "director": "Lee Unkrich",
+    "description": "A music-loving boy journeys to the Land of the Dead, uncovering family history along the way.",
+    "poster": "coco.jpg"
+  }
+]
