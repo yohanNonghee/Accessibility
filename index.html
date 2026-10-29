@@ -1,34 +1,69 @@
-<!DOCTYPE html>
-<html lang="th">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessibility Project - Movie Directory</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Explore two movie directory projects and read their accessibility evaluation.">
+    <title>Movie Directory Accessibility Project</title>
     <style>
-        body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #333; }
-        h1, h2 { color: #1a365d; }
-        .card { background: #f7fafc; border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
-        a.button { display: inline-block; background: #3182ce; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; margin-top: 10px; }
-        a.button:hover { background: #2b6cb0; }
+        :root { color-scheme: light; font-family: Arial, Helvetica, sans-serif; color: #111; background: #f4f6f7; }
+        * { box-sizing: border-box; }
+        body { max-width: 960px; margin: 0 auto; padding: 32px 20px 56px; line-height: 1.65; }
+        a { color: #174e38; }
+        a:focus-visible { outline: 3px solid #005fcc; outline-offset: 4px; }
+        .skip-link { position: absolute; top: 8px; left: 12px; transform: translateY(-160%); padding: 10px 14px; background: #111; color: #fff; }
+        .skip-link:focus { transform: translateY(0); }
+        header { padding: clamp(32px, 8vw, 72px) 0 28px; }
+        .eyebrow { margin-bottom: 8px; color: #214434; font-size: .78rem; font-weight: 700; letter-spacing: .12em; }
+        h1, h2 { color: #172a22; line-height: 1.15; }
+        h1 { max-width: 700px; margin: 0 0 16px; font-family: Georgia, serif; font-size: clamp(2.4rem, 7vw, 4.5rem); font-weight: 500; }
+        h2 { font-family: Georgia, serif; font-size: clamp(1.5rem, 4vw, 2rem); }
+        .intro { max-width: 680px; color: #424b52; font-size: 1.08rem; }
+        .card { margin: 22px 0; border: 1px solid #cbd0d5; border-radius: 8px; padding: clamp(20px, 4vw, 32px); background: #fff; }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 18px; }
+        .project { border: 1px solid #cbd0d5; border-radius: 6px; padding: 20px; background: #f8faf9; }
+        .project h3 { margin: 0 0 8px; font-size: 1.1rem; }
+        .project p { min-height: 3.2em; color: #424b52; }
+        .button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; padding: 9px 16px; background: #214434; color: #fff; font-weight: 700; text-decoration: none; }
+        .button:hover { background: #173527; text-decoration: underline; }
+        .button-secondary { background: #4a5568; }
+        .summary { border-left: 5px solid #214434; background: #eef3ef; }
+        .summary p:last-child { margin-bottom: 0; }
+        footer { margin-top: 32px; border-top: 1px solid #cbd0d5; padding-top: 18px; color: #424b52; font-size: .9rem; }
     </style>
 </head>
 <body>
-    <h1>Accessibility Web Project: Movie Directory</h1>
-    <p>A project comparing the development of a movie website based on WCAG standards, contrasting AI-generated output without specific skills against output produced using custom skills.</p>
-
-    <div class="card">
-        <h2>🔗 Project Links</h2>
-        <p><strong>Project A (Without Skill):</strong> For viewing results that have not yet been evaluated for accessibility compliance.</p>
-        <a href="./a/index.html" class="button">Go to Project A</a>
-
-        <p style="margin-top: 20px;"><strong>Project B (With Skill):</strong> For viewing results that are fully compliant with accessibility standards.</p>
-        <a href="./b/index.html" class="button">Go to Project B</a>
-    </div>
-
-    <div class="card">
-        <h2>📄 Report</h2>
-        <p>Read the details of the A/B testing results, AI Agent behavior, and manual testing at the link below</p>
-        <a href="./report.html" class="button" style="background: #2f855a;">Read Full Report</a>
-    </div>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header>
+        <p class="eyebrow">ACCESSIBILITY PROJECT</p>
+        <h1>Movie directories, with accessibility in mind.</h1>
+        <p class="intro">Compare two approaches to building a movie website, explore the accessible Project B experience, and read the evaluation report.</p>
+    </header>
+    <main id="main-content">
+        <section class="card" aria-labelledby="projects-heading">
+            <h2 id="projects-heading">Explore the projects</h2>
+            <div class="project-grid">
+                <article class="project">
+                    <h3>Project A — without the accessibility skill</h3>
+                    <p>The comparison version of the movie directory.</p>
+                    <a href="./a/index.html" class="button button-secondary">Open Project A</a>
+                </article>
+                <article class="project">
+                    <h3>Project B — with accessibility guidance</h3>
+                    <p>Search films, open details, save a watchlist, and try the sign-up form.</p>
+                    <a href="./b/index.html" class="button">Open Project B</a>
+                </article>
+            </div>
+        </section>
+        <section class="card summary" aria-labelledby="summary-heading">
+            <h2 id="summary-heading">Evaluation at a glance</h2>
+            <p>Project B passed all five Playwright checks, including the keyboard task flow, sign-up validation and submission, visible focus, and the serious/critical Axe scan. A supplementary full Axe scan, including color contrast, also reported no violations.</p>
+            <p>The report includes the A/B comparison, the agent interaction experiment, and manual testing observations.</p>
+            <a href="./report.html" class="button">Read the full evaluation report</a>
+        </section>
+    </main>
+    <footer>
+        <p>Project B test details are also available in <a href="./b/test-results.md">the recorded test results</a>.</p>
+    </footer>
 </body>
 </html>

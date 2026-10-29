@@ -226,7 +226,7 @@ function savedMoviesLabel() {
 
 async function loadMovies() {
   try {
-    const response = await fetch("./movies.json");
+    const response = await fetch("../b/movies.json");
     if (!response.ok) throw new Error(`Movie data request failed with status ${response.status}.`);
     const data = await response.json();
     if (!Array.isArray(data) || data.length < 8 || data.some((movie) =>

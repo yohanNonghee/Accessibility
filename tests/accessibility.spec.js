@@ -16,6 +16,28 @@ test.describe('Movie Directory Accessibility Tests', () => {
    await page.goto(movieSiteUrl);
   });
 
+  test('Project homepage exposes the report and both movie directories', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+      'Movie directories, with accessibility in mind.'
+    );
+    await page.getByRole('link', { name: 'Open Project A' }).click();
+    await expect(page).toHaveURL(/\/a\/index\.html$/);
+    await expect(page.locator('.movie-card')).toHaveCount(8);
+
+    await page.goto('/');
+    await page.getByRole('link', { name: 'Open Project B' }).click();
+    await expect(page).toHaveURL(/\/b\/index\.html$/);
+    await expect(page.getByRole('searchbox', { name: 'Search' })).toBeVisible();
+
+    await page.goto('/');
+    await page.getByRole('link', { name: 'Read the full evaluation report' }).click();
+    await expect(page).toHaveURL(/\/report\.html$/);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await expect(page.getByRole('heading', { name: 'Accessibility Evaluation Report' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Back to project home' })).toBeVisible();
+  });
+
   // 1. Test keyboard and main tasks (Tab, Shift+Tab, Enter, Space, Escape)
   test('Main Task: Search, open dialog, close, save, and sign up using keyboard only', async ({ page }) => {
     //Check that the skip link appears first when the Tab key is pressed.

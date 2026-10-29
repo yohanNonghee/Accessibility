@@ -4,11 +4,12 @@
 
 Command: `npx playwright test tests/accessibility.spec.js`
 
-Result: **4 passed, 0 failed**
+Result: **5 passed, 0 failed**
 
 Dependencies were installed from the lockfile with `npm ci`; npm reported 0 known vulnerabilities in the six installed packages.
 
 - **Keyboard-only main task:** passed. Verified skip-link-first keyboard access, movie search, opening the details dialog, Escape dismissal, focus returning to the original result, saving with the keyboard, and successful sign-up.
+- **Project homepage and report:** passed. Verified the landing page links to both movie directories and the English-language report, and that Projects A and B and the report load.
 - **Sign-up button validation and submission:** passed. Empty submission reports the four required-field errors; a normal button click with valid values displays a confirmation.
 - **Visible focus indicators:** passed. The focused interactive element displays a visible outline or shadow.
 - **Axe accessibility scan:** passed. No serious or critical violations were reported. The test excludes the color-contrast rule.
@@ -25,7 +26,7 @@ Dependencies were installed from the lockfile with `npm ci`; npm reported 0 know
 - Axe reported a mismatch between the brand link's visible text and its `aria-label`. The conflicting label was removed.
 - Playwright and its Chromium browser were missing initially; they were installed for the test run.
 
-All four tests passed after these fixes.
+All five tests passed after these fixes.
 
 ## Button and link interaction check
 

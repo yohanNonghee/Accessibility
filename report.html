@@ -1,67 +1,101 @@
-<!DOCTYPE html>
-<html lang="th">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Accessibility evaluation comparing two movie directory projects.">
     <title>Accessibility Project Report</title>
     <style>
-        body { font-family: sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #2d3748; }
-        h1, h2 { color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+        :root { color-scheme: light; font-family: Arial, Helvetica, sans-serif; color: #111; background: #fff; }
+        * { box-sizing: border-box; }
+        body { max-width: 960px; margin: 0 auto; padding: 28px 20px 56px; line-height: 1.65; }
+        a { color: #174e38; }
+        a:focus-visible { outline: 3px solid #005fcc; outline-offset: 4px; }
+        header { margin-bottom: 32px; }
+        h1, h2 { color: #172a22; font-family: Georgia, serif; line-height: 1.2; }
+        h1 { font-size: clamp(2.2rem, 6vw, 3.5rem); }
+        h2 { margin-top: 2.4rem; border-bottom: 2px solid #cbd0d5; padding-bottom: 8px; font-size: clamp(1.4rem, 4vw, 2rem); }
         table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        th, td { border: 1px solid #cbd5e0; padding: 12px; text-align: left; }
-        th { background: #edf2f7; }
-        .highlight { background: #fffaf0; border-left: 4px solid #dd6b20; padding: 15px; margin: 15px 0; }
+        caption { margin-bottom: 10px; text-align: left; font-weight: 700; }
+        th, td { border: 1px solid #4a5568; padding: 12px; text-align: left; vertical-align: top; }
+        th { background: #eef3ef; }
+        .table-wrap { overflow-x: auto; }
+        .highlight { border-left: 4px solid #8a431e; padding: 15px; background: #fff8ed; }
+        .back-link { min-height: 44px; display: inline-flex; align-items: center; margin-bottom: 16px; font-weight: 700; }
+        code { overflow-wrap: anywhere; }
     </style>
 </head>
 <body>
-    <h1>Accessibility Evaluation Report</h1>
-    
-    <h2>1. A/B Test Failures Comparison</h2>
-    <p>Results of running Playwright Tests comparing Project A and Project B</p>
-    <table>
-        <tr>
-            <th>Test suite (Test Cases)</th>
-            <th>Project A (No Skill)</th>
-            <th>Project B (With Skill)</th>
-        </tr>
-        <tr>
-            <td>Keyboard Navigation & Main Task</td>
-            <td>❌ Failed (Focus lost / Tab doesn't reach some buttons)</td>
-            <td>✅ Passed (Completed tasks with keyboard 100%)</td>
-        </tr>
-        <tr>
-            <td>Dialog Focus Management</td>
-            <td>❌ Failed (Opened Dialog but focus not moved in / Closed but didn't bounce back)</td>
-            <td>✅ Passed (Focus trap and Focus return work correctly)</td>
-        </tr>
-        <tr>
-            <td>Accessible Names (ARIA & Labels)</td>
-            <td>❌ Failed (Save button lacks a clear aria-label)</td>
-            <td>✅ Passed (All buttons have clear accessible names)</td>
-        </tr>
-        <tr>
-            <td>Axe-core Serious/Critical Violations</td>
-            <td>❌ Found 4 violations</td>
-            <td>✅ No Serious or Critical violations found</td>
-        </tr>
-    </table>
+    <header>
+        <a class="back-link" href="./index.html">← Back to project home</a>
+        <h1>Accessibility Evaluation Report</h1>
+        <p>Comparison of two movie directory implementations, including automated accessibility checks, an agent interaction experiment, and manual observations.</p>
+    </header>
+    <main>
+        <section aria-labelledby="comparison-heading">
+            <h2 id="comparison-heading">1. A/B test comparison</h2>
+            <p>The table summarizes the reported Playwright evaluation of Project A and Project B.</p>
+            <div class="table-wrap">
+                <table>
+                    <caption>Reported accessibility test outcomes</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Test area</th>
+                            <th scope="col">Project A (without skill)</th>
+                            <th scope="col">Project B (with skill)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Keyboard navigation and main task</th>
+                            <td>Failed: focus was lost and Tab did not reach some controls.</td>
+                            <td>Passed: the main task was completed using the keyboard.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Dialog focus management</th>
+                            <td>Failed: focus did not move into the dialog or return to its opener.</td>
+                            <td>Passed: focus moved into the dialog and returned to the opener.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Accessible names</th>
+                            <td>Failed: the save control did not have a clear accessible name.</td>
+                            <td>Passed: controls have descriptive accessible names.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Serious or critical Axe violations</th>
+                            <td>Four violations were reported.</td>
+                            <td>No serious or critical violations were reported in the current scan.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-    <h2>2. Agent Div Experiment (AI Agent Behavior)</h2>
-    <div class="highlight">
-        <p><strong>Before changing to div:</strong> The AI Agent could find and click the save button correctly because it used the <code>&lt;button&gt;</code> tag with a clear accessible name.</p>
-        <p><strong>After changing the button to div:</strong> When the save button was changed to a plain <code>&lt;div&gt;</code> tag without <code>role="button"</code> or <code>tabindex</code>, it caused the AI Agent to fail in recognizing or interacting with the button, and the screen reader skipped reading it entirely, leading to failure in completing the main task.</p>
-    </div>
+        <section aria-labelledby="agent-heading">
+            <h2 id="agent-heading">2. Agent interaction experiment</h2>
+            <div class="highlight">
+                <p><strong>Using a native button:</strong> The agent could locate and activate the save control when it was implemented as a <code>&lt;button&gt;</code> with a descriptive accessible name.</p>
+                <p><strong>Replacing it with a plain div:</strong> Without button semantics, keyboard focus, or an accessible role, the agent could not reliably recognize or activate the control, and assistive technology could skip it.</p>
+            </div>
+        </section>
 
-    <h2>3. Manual Testing Findings (Findings from Manual Testing)</h2>
-    <ul>
-        <li><strong>200% Zoom:</strong> It was found that in Project A, some parts of the form overlap when the page is zoomed in, but in Project B, the responsive layout passes the Reflow criterion.</li>
-        <li><strong>Screen Reader:</strong> The announcement of result counts through <code>aria-live="polite"</code> helps visually impaired users know about changes immediately after typing a search query, which some automated tools do not cover as comprehensively as real-time audio feedback.</li>
-    </ul>
+        <section aria-labelledby="manual-heading">
+            <h2 id="manual-heading">3. Manual testing observations</h2>
+            <ul>
+                <li><strong>200% zoom:</strong> Some Project A form content overlapped. Project B's responsive layout was observed to reflow more effectively.</li>
+                <li><strong>Screen readers:</strong> A polite live region announces result-count changes as the search query changes, providing timely feedback beyond what automated checks alone can verify.</li>
+            </ul>
+        </section>
 
-    <h2>4. Key Skill Rules That Make a Difference</h2>
-    <p>The most impactful rules are <strong>Focus Management & Keyboard Navigation</strong> and the requirement to use Native HTML Elements (do not use div for buttons) which ensures AI generates correct code from the start, preventing errors in focus control within Dialogs.</p>
+        <section aria-labelledby="rules-heading">
+            <h2 id="rules-heading">4. Accessibility practices that mattered</h2>
+            <p>Focus management, keyboard support, and native HTML controls were the most consequential practices. Native buttons provide keyboard behavior and accessibility semantics by default; dialogs also need deliberate focus placement and restoration.</p>
+        </section>
 
-    <h2>5. Things AI Got Wrong in the Early Stages</h2>
-    <p>In the early stages, AI often preferred to use generic tags like <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code> with click events instead of using the actual <code>&lt;button&gt;</code> tag, and would often forget to set up scripts to return focus to the original button after closing a Dialog if no custom skills were in place.</p>
+        <section aria-labelledby="early-heading">
+            <h2 id="early-heading">5. Common early implementation mistakes</h2>
+            <p>Early drafts sometimes used generic <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code> elements as clickable controls instead of native buttons. They could also omit returning focus to the original control after a dialog closes.</p>
+        </section>
+    </main>
 </body>
 </html>
